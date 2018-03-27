@@ -3,6 +3,7 @@ import re
 import nltk
 import nltk.data
 import string
+from time import time
 from nltk.tokenize import WordPunctTokenizer
 from nltk.stem import WordNetLemmatizer
 class text2sents:
@@ -51,10 +52,14 @@ class text2sents:
 
     def proceed(self, is_hierarchical=True):
         #sents = [self.__split__(text) for text in self.__texts]
+        print('Start tokenizing....')
+        start = time()
         text_sents = list(map(self.__split_text__, self.__texts))
         #Split sentences into words
         if is_hierarchical:
             text_sents = list(map(self.__split_sent__, text_sents))
+        end = time()
+        print('Processing Finished! Timing: ', round(end-start, 3))
         return text_sents
 
 class sent2words:
@@ -105,7 +110,11 @@ class sent2words:
     
     def proceed(self):
         #self.__texts = self.__preprocess__(self.__texts)
+        #print('Start tokenizing....')
+        #start = time()
         sent_words = list(map(self.__split__, self.__sents))
+        end = time()
+        #print('Processing Finished! Timing: ', round(end-start, 3))
         return sent_words
     
     def splitList(self, sents):
